@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juan Cátedra — Páginas Web a Medida</title>
+  <meta name="description" content="Diseño y desarrollo páginas web a medida para negocios. Código real, diseño profesional, resultados visibles." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #FAFAF7;
+      --surface:  #F2EFE8;
+      --border:   rgba(30,25,20,0.10);
+      --ink:      #1E1914;
+      --muted:    #8A8070;
+      --camel:    #C49A6C;
+      --camel-lo: rgba(196,154,108,0.12);
+      --black:    #111009;
+      --white:    #FFFFFF;
+      --wa-green: #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 6%;
+      background: rgba(250,250,247,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo em {
+      font-style: italic;
+      color: var(--camel);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--camel);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-links a.active { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--ink) !important;
+      color: var(--white) !important;
+      padding: 0.55rem 1.4rem !important;
+      border-radius: 0 !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      font-size: 0.75rem !important;
+      transition: background 0.2s, color 0.2s !important;
+    }
+
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--bg) !important; color: var(--ink) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      padding: 0 6% 5rem;
+      padding-top: 9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--camel);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 600;
+      line-height: 0.95;
+      max-width: 14ch;
+      margin-bottom: 2.5rem;
+      color: var(--ink);
+    }
+
+    .hero h1 i {
+      color: var(--camel);
+      font-weight: 400;
+    }
+
+    .hero-sub {
+      max-width: 40ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.25rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-dark:hover { background: var(--white); color: var(--ink); }
+
+    .btn-whatsapp:hover { background: var(--wa-green) !important; color: var(--white) !important; }
+
+    .btn-outline {
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.25rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+
+    .hero-rule {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-top: 4rem;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 7rem 6%;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--camel);
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2.2rem, 4.5vw, 4rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 48ch;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 4rem;
+      font-weight: 300;
+    }
+
+    /* ── PROYECTOS ── */
+    #proyectos { background: var(--surface); }
+
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .proyecto-card {
+      background: var(--bg);
+      overflow: hidden;
+      transition: background 0.25s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .proyecto-card:hover { background: var(--white); }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .proyecto-thumb {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Screenshot thumbnails */
+    .thumb-screenshot {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .proyecto-card:hover .thumb-screenshot {
+      transform: scale(1.03);
+    }
+
+    /* Próximo thumb */
+    .thumb-next {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.75rem;
+      color: var(--muted);
+    }
+
+    .thumb-next .plus {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .thumb-next span {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      z-index: 2;
+    }
+
+    .proyecto-info {
+      padding: 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proyecto-url {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--camel);
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .proyecto-info h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .proyecto-info p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .proyecto-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ptag {
+      font-size: 0.65rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.65rem;
+      letter-spacing: 0.04em;
+    }
+
+    .proyecto-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      margin-top: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      transition: color 0.2s, border-color 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .proyecto-link:hover { color: var(--camel); border-color: var(--camel); }
+
+    /* ── CÓMO TRABAJO ── */
+    #proceso { background: var(--bg); }
+
+    .proceso-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .paso {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .paso-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(196,154,108,0.20);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .paso h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+
+    .paso p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── POR QUÉ ELEGIRME ── */
+    #porq { background: var(--surface); }
+
+    .porq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .porq-left .section-desc { margin-bottom: 0; }
+
+    .porq-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .ventaja {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ventaja-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--camel);
+      min-width: 2rem;
+      padding-top: 2px;
+    }
+
+    .ventaja-body h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .ventaja-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+    }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .contacto-inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .contacto-inner .section-title {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      margin-bottom: 1.25rem;
+    }
+
+    .contacto-inner .section-desc {
+      max-width: 44ch;
+      margin: 0 auto 3rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111009;
+      color: rgba(255,255,255,0.75);
+      padding: 4rem 6% 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 30ch;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .footer-social a {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .footer-social a:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+    }
+
+    .footer-col-title {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-col a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: #fff; }
+
+    .footer-col .footer-email {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.88rem;
+      font-weight: 300;
+      word-break: break-all;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      font-weight: 300;
+    }
+
+    .footer-loc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      font-weight: 300;
+    }
+
+    /* ── MOBILE MENU ── */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { display: none; }
+      .menu-toggle { display: flex; }
+      .hero { padding: 8rem 5% 4rem; }
+      section { padding: 5rem 5%; }
+      .porq-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+      .proyectos-grid { grid-template-columns: 1fr; }
+      .proceso-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#inicio" class="nav-logo">Juan <em>Cátedra</em></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#porq">Por qué yo</a></li>
+      <li><a href="#contacto" class="nav-cta">Empecemos</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <p class="hero-label">Desarrollo web · Córdoba</p>
+
+      <h1>
+        Páginas web<br>que <i>funcionan</i><br>de verdad.
+      </h1>
+
+      <p class="hero-sub">
+        Diseño y construyo webs a medida para negocios. Nada de plantillas, nada de generadores. Código real, resultados visibles.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#proyectos" class="btn-dark">Ver mis trabajos</a>
+        <a href="#contacto" class="btn-outline">Cuéntame tu idea →</a>
+      </div>
+    </div>
+    <div class="hero-rule"></div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos">
+    <span class="eyebrow">Trabajo real</span>
+    <h2 class="section-title">Proyectos en producción</h2>
+    <p class="section-desc">Webs que están online ahora mismo, con clientes reales y resultados concretos.</p>
+
+    <div class="proyectos-grid">
+
+      <!-- SAUDA BRAND -->
+      <div class="proyecto-card">
+        <a class="card-overlay" href="https://saudabrand.com" target="_blank" rel="noopener" aria-label="Visitar Sauda Brand"></a>
+        <div class="proyecto-thumb">
+          <img class="thumb-screenshot" src="sauda-thumb.jpg" alt="Sauda Brand" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/680/crop/430/https://saudabrand.com';" />
+          <span class="live-badge">Live</span>
+        </div>
+        <div class="proyecto-info">
+          <p class="proyecto-url">saudabrand.com</p>
+          <h3>Sauda Brand</h3>
+          <p>Web y branding para una agencia creativa. Diseño sofisticado, rendimiento técnico y experiencia de usuario construidos desde cero.</p>
+          <div class="proyecto-tags">
+            <span class="ptag">Branding</span>
+            <span class="ptag">Web Design</span>
+            <span class="ptag">Frontend</span>
+          </div>
+          <a href="https://saudabrand.com" class="proyecto-link" target="_blank" rel="noopener">Visitar web →</a>
+        </div>
+      </div>
+
+      <!-- ARMARIOS FERNÁNDEZ -->
+      <div class="proyecto-card">
+        <a class="card-overlay" href="https://armariosfernandez.com" target="_blank" rel="noopener" aria-label="Visitar Armarios Fernández"></a>
+        <div class="proyecto-thumb">
+          <img class="thumb-screenshot" src="armarios-thumb.jpg" alt="Armarios Fernández" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/680/crop/430/https://armariosfernandez.com';" />
+          <span class="live-badge">Live</span>
+        </div>
+        <div class="proyecto-info">
+          <p class="proyecto-url">armariosfernandez.com</p>
+          <h3>Armarios Fernández</h3>
+          <p>Presencia online para un negocio local de carpintería en Córdoba. Orientada a captar presupuestos y generar confianza desde el primer minuto.</p>
+          <div class="proyecto-tags">
+            <span class="ptag">Pyme local</span>
+            <span class="ptag">SEO local</span>
+            <span class="ptag">Conversión</span>
+          </div>
+          <a href="https://armariosfernandez.com" class="proyecto-link" target="_blank" rel="noopener">Visitar web →</a>
+        </div>
+      </div>
+
+      <!-- PRÓXIMO -->
+      <div class="proyecto-card" style="opacity: 0.55; cursor: default;">
+        <div class="proyecto-thumb thumb-next">
+          <div class="plus">+</div>
+          <span>Tu proyecto aquí</span>
+        </div>
+        <div class="proyecto-info">
+          <p class="proyecto-url">tu-negocio.com</p>
+          <h3>¿El siguiente?</h3>
+          <p>Si tienes un negocio y quieres que tenga la presencia que merece, hablamos. Sin compromiso.</p>
+          <a href="#contacto" class="proyecto-link">Contactar →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJO -->
+  <section id="proceso">
+    <span class="eyebrow">Cómo trabajo</span>
+    <h2 class="section-title">Tu web lista<br>y funcionando.</h2>
+    <p class="section-desc">Sin sorpresas, sin tecnicismos. Así es el proceso de principio a fin.</p>
+
+    <div class="proceso-grid">
+      <div class="paso">
+        <div class="paso-num">01</div>
+        <h3>Escucho</h3>
+        <p>Entiendo tu negocio, tus clientes y lo que quieres conseguir con la web antes de proponer nada.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">02</div>
+        <h3>Propongo</h3>
+        <p>Te presento un plan claro: qué vamos a construir, cuánto cuesta y cuándo lo tienes. Sin letra pequeña.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">03</div>
+        <h3>Diseño</h3>
+        <p>Primero el look and feel. Apruebas el diseño antes de que empiece el desarrollo.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">04</div>
+        <h3>Construyo</h3>
+        <p>Código limpio, rápido y bien estructurado. Tu web carga bien, funciona en móvil y aparece en Google.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">05</div>
+        <h3>Lanzo</h3>
+        <p>Puesta en producción sin sustos. Configuro todo para que esté operativo desde el primer momento.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">06</div>
+        <h3>Acompaño</h3>
+        <p>No desaparezco el día del lanzamiento. Seguimiento, ajustes y evolución si el proyecto los necesita.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÉ YO -->
+  <section id="porq">
+    <div class="porq-grid">
+      <div class="porq-left">
+        <span class="eyebrow">Por qué elegirme</span>
+        <h2 class="section-title">Páginas web<br>hechas con criterio</h2>
+        <p class="section-desc">
+          Soy Juan Cátedra, estudio Ingeniería Informática en Córdoba y me especializo en construir páginas web para negocios. Cada web que entrego está hecha a mano, pensada para tu cliente y optimizada para dar resultados reales.
+        </p>
+      </div>
+
+      <div class="porq-right">
+        <div class="ventaja">
+          <span class="ventaja-num">I</span>
+          <div class="ventaja-body">
+            <h4>Código propio, sin plantillas</h4>
+            <p>Nada de WordPress con tema comprado. Tu web es única, más rápida y sin las limitaciones de un constructor genérico.</p>
+          </div>
+        </div>
+        <div class="ventaja">
+          <span class="ventaja-num">II</span>
+          <div class="ventaja-body">
+            <h4>Diseño orientado a resultados</h4>
+            <p>El objetivo no es que la web quede bonita, sino que convierta visitas en clientes. Cada decisión de diseño tiene una razón de negocio.</p>
+          </div>
+        </div>
+        <div class="ventaja">
+          <span class="ventaja-num">III</span>
+          <div class="ventaja-body">
+            <h4>SEO técnico desde el día uno</h4>
+            <p>La web se construye para que Google la indexe bien: velocidad, estructura semántica y metadatos correctos desde el principio.</p>
+          </div>
+        </div>
+        <div class="ventaja">
+          <span class="ventaja-num">IV</span>
+          <div class="ventaja-body">
+            <h4>Comunicación directa y transparente</h4>
+            <p>Sin intermediarios ni agencias. Hablas conmigo directamente durante todo el proyecto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="contacto-inner">
+      <span class="eyebrow">Siguiente paso</span>
+      <h2 class="section-title">¿Tienes un proyecto en mente?</h2>
+      <p class="section-desc">
+        Cuéntame de qué va tu negocio y qué quieres conseguir. Te digo sin compromiso cómo puedo ayudarte.
+      </p>
+      <a href="https://wa.me/34722276809?text=Hola%20Juan%2C%20necesito%20información%20sobre%20una%20página%20web%20para%20mi%20negocio." class="btn-dark btn-whatsapp" target="_blank">Escríbeme por WhatsApp →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Juan Cátedra</div>
+        <p class="footer-brand-desc">Desarrollo web a medida para negocios. Diseño, código y estrategia en un solo sitio.</p>
+        <div class="footer-social">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/juuaancs_/" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <!-- WhatsApp -->
+          <a href="https://wa.me/34722276809?text=Hola%20Juan%2C%20necesito%20información%20sobre%20una%20página%20web%20para%20mi%20negocio." target="_blank" title="WhatsApp" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Contacto</p>
+        <ul>
+          <li><a href="https://wa.me/34722276809?text=Hola%20Juan%2C%20necesito%20información%20sobre%20una%20página%20web%20para%20mi%20negocio." target="_blank">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/juuaancs_/" target="_blank">Instagram</a></li>
+          <li><a href="mailto:juancatedraseoane@gmail.com" class="footer-email">juancatedraseoane@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-title">Proyectos</p>
+        <ul>
+          <li><a href="https://saudabrand.com" target="_blank">Sauda Brand</a></li>
+          <li><a href="https://armariosfernandez.com" target="_blank">Armarios Fernández</a></li>
+          <li><a href="#contacto">Tu proyecto</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© Juan Cátedra 2026 · Hecho con código, no con plantillas.</span>
+      <span class="footer-loc">Córdoba, España</span>
+    </div>
+  </footer>
+
+  <script>
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], div[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + id) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      const open = menu.style.display === 'flex';
+      menu.style.display = open ? 'none' : 'flex';
+      if (!open) {
+        menu.style.flexDirection = 'column';
+        menu.style.position = 'fixed';
+        menu.style.top = '60px';
+        menu.style.left = '0';
+        menu.style.right = '0';
+        menu.style.background = 'rgba(250,250,247,0.97)';
+        menu.style.padding = '2rem 6%';
+        menu.style.gap = '1.5rem';
+        menu.style.backdropFilter = 'blur(14px)';
+        menu.style.borderBottom = '1px solid rgba(30,25,20,0.10)';
+      }
+    });
+
+    // Close mobile menu on link click
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          menu.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
