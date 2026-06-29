@@ -262,14 +262,17 @@
     .proyecto-card {
       background: var(--bg);
       overflow: hidden;
-      transition: background 0.25s;
+      transition: background 0.3s, box-shadow 0.3s;
       display: flex;
       flex-direction: column;
       position: relative;
       cursor: pointer;
     }
 
-    .proyecto-card:hover { background: var(--white); }
+    .proyecto-card:hover {
+      background: var(--white);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    }
 
     .card-overlay {
       position: absolute;
@@ -278,10 +281,24 @@
     }
 
     .proyecto-thumb {
-      height: 240px;
+      height: 270px;
       position: relative;
       overflow: hidden;
     }
+
+    /* subtle bottom gradient so the badge pops */
+    .proyecto-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        transparent 50%,
+        rgba(0,0,0,0.18) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .live-badge { z-index: 3; }
 
     /* Screenshot thumbnails */
     .thumb-screenshot {
@@ -290,11 +307,13 @@
       object-fit: cover;
       object-position: top center;
       display: block;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
+      filter: brightness(0.97);
     }
 
     .proyecto-card:hover .thumb-screenshot {
-      transform: scale(1.03);
+      transform: scale(1.04);
+      filter: brightness(1);
     }
 
     /* Próximo thumb */
@@ -713,7 +732,7 @@
       <div class="proyecto-card">
         <a class="card-overlay" href="https://saudabrand.com" target="_blank" rel="noopener" aria-label="Visitar Sauda Brand"></a>
         <div class="proyecto-thumb">
-          <img class="thumb-screenshot" src="sauda-thumb.jpg" alt="Sauda Brand" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/680/crop/430/https://saudabrand.com';" />
+          <img class="thumb-screenshot" src="sauda-thumb.jpg" alt="Sauda Brand" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/1360/crop/860/https://saudabrand.com';" />
           <span class="live-badge">Live</span>
         </div>
         <div class="proyecto-info">
@@ -733,7 +752,7 @@
       <div class="proyecto-card">
         <a class="card-overlay" href="https://armariosfernandez.com" target="_blank" rel="noopener" aria-label="Visitar Armarios Fernández"></a>
         <div class="proyecto-thumb">
-          <img class="thumb-screenshot" src="armarios-thumb.jpg" alt="Armarios Fernández" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/680/crop/430/https://armariosfernandez.com';" />
+          <img class="thumb-screenshot" src="armarios-thumb.jpg" alt="Armarios Fernández" onerror="this.onerror=null;this.src='https://image.thum.io/get/width/1360/crop/860/https://armariosfernandez.com';" />
           <span class="live-badge">Live</span>
         </div>
         <div class="proyecto-info">
@@ -813,7 +832,7 @@
         <span class="eyebrow">Por qué elegirme</span>
         <h2 class="section-title">Páginas web<br>hechas con criterio</h2>
         <p class="section-desc">
-          Soy Juan Cátedra, estudio Ingeniería Informática en Córdoba y me especializo en construir páginas web para negocios. Cada web que entrego está hecha a mano, pensada para el cliente y optimizada para dar resultados reales.
+          Soy Juan Cátedra, estudio Ingeniería Informática en Córdoba y me especializo en construir páginas web para negocios. Cada web que entrego está hecha a mano, pensada para tu cliente y optimizada para dar resultados reales.
         </p>
       </div>
 
